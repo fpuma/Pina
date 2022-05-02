@@ -1,0 +1,12 @@
+#include "pch.h"
+#include <base/entity.h>
+#include <base/icomponent.h>
+#include <base/isystem.h>
+#include <base/containers/isystemcontainer.h>
+#include <base/containers/systemcontainer.h>
+#include <base/providers/componentprovider.h>
+#include <base/providers/entityprovider.h>
+#include <base/providers/icomponentprovider.h>
+#include <base/providers/ientityprovider.h>
+#include <base/providers/iprovider.h>
+#include <base/providers/iprovidercontainer.h>

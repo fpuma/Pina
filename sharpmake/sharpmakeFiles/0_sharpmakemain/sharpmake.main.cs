@@ -2,16 +2,15 @@ using System.IO;
 
 [module: Sharpmake.Include(@"..\base\*")]
 
-//Examples
-[module: Sharpmake.Include(@"..\exampleProjects\*")]
+[module: Sharpmake.Include(@"..\pina\*")]
+[module: Sharpmake.Include(@"..\extern\*")]
 
 public static class SharpmakeMainClass
 {
     [Sharpmake.Main]
     public static void SharpmakeMain(Sharpmake.Arguments sharpmakeArgs)
     {
-        sharpmakeArgs.Generate<Example.Solutions.ExampleSolution>();
-        sharpmakeArgs.Generate<Example.Solutions.ExternExampleSolution>();
+        sharpmakeArgs.Generate<Puma.PinaSolution>();
     }
 }
 
