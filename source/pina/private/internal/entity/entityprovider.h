@@ -1,5 +1,6 @@
 #pragma once
-#include <base/providers/ientityprovider.h>
+#include <pina/entity/ientityprovider.h>
+#include <vector>
 
 namespace puma
 {

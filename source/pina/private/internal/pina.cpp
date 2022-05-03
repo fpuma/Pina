@@ -1,0 +1,11 @@
+#include <pina/component/icomponent.h>
+#include <pina/component/icomponentprovider.h>
+#include <pina/entity/entity.h>
+#include <pina/entity/ientityprovider.h>
+#include <pina/provider/iprovider.h>
+#include <pina/provider/iprovidercontainer.h>
+#include <pina/system/isystem.h>
+#include <pina/system/isystemprovider.h>
+#include <internal/entity/entityprovider.h>
+#include <internal/component/componentprovider.h>
+#include <internal/system/systemprovider.h>

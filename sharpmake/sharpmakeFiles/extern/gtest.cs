@@ -3,8 +3,11 @@ namespace Puma
     [Sharpmake.Export]
     class GoogleTest : Puma.Common.IExternBinaries
     {
+        private static readonly string RelativeSourcePath = @"googletest-release-1.10.0";
+        public static readonly string FullExternSourcePath = Puma.SharpmakeUtils.GetExternPath() + @"\" + RelativeSourcePath;
+
         public GoogleTest()
-            : base("GTest", @"googletest-release-1.10.0")
+            : base("GTest", RelativeSourcePath)
         { }
 
         public override void ConfigureIncludes(Configuration conf, Sharpmake.Target target)

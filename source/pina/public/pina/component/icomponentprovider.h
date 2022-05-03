@@ -1,8 +1,8 @@
 #pragma once
 
-#include <base/entity.h>
-#include <base/icomponent.h>
-#include <base/providers/iprovider.h>
+#include <pina/entity/entity.h>
+#include <pina/component/icomponent.h>
+#include <pina/provider/iprovider.h>
 #include <utils/containers/mappedrealizationcontainer.h>
 
 namespace puma

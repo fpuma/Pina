@@ -1,13 +1,14 @@
 #pragma once
 
-#include <base/containers/isystemcontainer.h>
+#include <pina/system/isystemprovider.h>
 
 namespace puma
 {
 
     class IRenderQueue;
+    class ISystem;
 
-    class SystemContainer final : public ISystemContainer
+    class SystemProvider final : public ISystemProvider
     {
     public:
 

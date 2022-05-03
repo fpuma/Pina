@@ -1,6 +1,7 @@
-#include <pch.h>
+#include "entityprovider.h"
 
-#include <base/providers/entityprovider.h>
+#include <algorithm>
+#include <assert.h>
 
 namespace puma
 {

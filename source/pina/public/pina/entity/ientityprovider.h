@@ -1,6 +1,8 @@
 #pragma once
-#include <base/entity.h>
-#include <base/providers/iprovider.h>
+#include <pina/entity/entity.h>
+#include <pina/provider/iprovider.h>
+
+#include <utils/numerictypes.h>
 
 namespace puma
 {

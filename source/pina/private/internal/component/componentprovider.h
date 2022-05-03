@@ -1,6 +1,6 @@
 #pragma once
 
-#include <base/providers/icomponentprovider.h>
+#include <pina/component/icomponentprovider.h>
 
 namespace puma
 {

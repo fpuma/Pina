@@ -6,7 +6,7 @@ namespace Puma
     public class PinaSolution : Puma.Common.IMySolution
     {
         public PinaSolution()
-            : base("Utils")
+            : base("Pina")
         {}
 
         public override void ConfigureAll(Configuration conf, Sharpmake.Target target)

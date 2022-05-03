@@ -1,5 +1,5 @@
 #pragma once
-#include <base/providers/iprovider.h>
+#include <pina/provider/iprovider.h>
 #include <utils/containers/uniquerealizationcontainer.h>
 
 namespace puma

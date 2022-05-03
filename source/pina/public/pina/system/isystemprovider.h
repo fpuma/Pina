@@ -1,14 +1,14 @@
 #pragma once
 
-#include <base/isystem.h>
+#include <pina/system/isystem.h>
 #include <utils/containers/uniquerealizationcontainer.h>
 
 namespace puma
 {
-    class ISystemContainer : public UniqueRealizationContainer<ISystem>, public NonCopyable
+    class ISystemProvider : public UniqueRealizationContainer<ISystem>, public NonCopyable
     {
     public:
-        virtual ~ISystemContainer(){}
+        virtual ~ISystemProvider(){}
 
         virtual void updateSystemsProperties() = 0;
     };

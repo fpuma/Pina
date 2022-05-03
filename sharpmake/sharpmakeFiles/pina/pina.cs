@@ -5,7 +5,9 @@ namespace Puma
     {
         public Pina()
             : base("Pina", @"pina")
-        { }
+        {
+            AdditionalSourceRootPaths.Add(Utils.FullExternSourcePath);
+        }
 
         public override void ConfigureAll(Configuration conf, Sharpmake.Target target)
         {
@@ -15,9 +17,6 @@ namespace Puma
 
             conf.IncludePrivatePaths.Add(@"\private");
             conf.IncludePaths.Add(@"\public");
-
-            conf.PrecompHeader = @"pch.h";
-            conf.PrecompSource = @"pcs.cpp";
 
             conf.Options.Add(Sharpmake.Options.Vc.General.TreatWarningsAsErrors.Enable);
         }

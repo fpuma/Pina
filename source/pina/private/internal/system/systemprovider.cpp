@@ -1,11 +1,11 @@
-#include "pch.h"
+#include "systemprovider.h"
 
-#include <base/containers/systemcontainer.h>
+#include <algorithm>
 
 namespace puma
 {
 
-    void SystemContainer::onAdded( Key _key, ISystem* _system )
+    void SystemProvider::onAdded( Key _key, ISystem* _system )
     {
         SystemProperties properties = _system->getProperties();
 
@@ -38,14 +38,14 @@ namespace puma
         }
     }
 
-    void SystemContainer::onRemoved( Key _key, ISystem* _system )
+    void SystemProvider::onRemoved( Key _key, ISystem* _system )
     {
         m_systemsToUpdate.erase( std::remove( m_systemsToUpdate.begin(), m_systemsToUpdate.end(), _system ), m_systemsToUpdate.end() );
         m_systemsToUpdatePrePhysics.erase( std::remove( m_systemsToUpdatePrePhysics.begin(), m_systemsToUpdatePrePhysics.end(), _system ), m_systemsToUpdatePrePhysics.end() );
         m_systemsToUpdatePostPhysics.erase( std::remove( m_systemsToUpdatePostPhysics.begin(), m_systemsToUpdatePostPhysics.end(), _system ), m_systemsToUpdatePostPhysics.end() );
     }
 
-    void SystemContainer::uninit()
+    void SystemProvider::uninit()
     {
         traverse( []( ISystem* _ptr ) 
         {
@@ -57,7 +57,7 @@ namespace puma
         clear();
     }
     
-    void SystemContainer::update( float _deltaTime )
+    void SystemProvider::update( float _deltaTime )
     {
         for( ISystem* systemPtr : m_systemsToUpdate )
         {
@@ -65,7 +65,7 @@ namespace puma
         }
     }
 
-    void SystemContainer::prePhysicsUpdate( float _deltaTime )
+    void SystemProvider::prePhysicsUpdate( float _deltaTime )
     {
         for ( ISystem* systemPtr : m_systemsToUpdatePrePhysics )
         {
@@ -73,7 +73,7 @@ namespace puma
         }
     }
 
-    void SystemContainer::postPhysicsUpdate( float _deltaTime )
+    void SystemProvider::postPhysicsUpdate( float _deltaTime )
     {
         for ( ISystem* systemPtr : m_systemsToUpdatePostPhysics )
         {
@@ -81,7 +81,7 @@ namespace puma
         }
     }
 
-    void SystemContainer::queueRenderables( IRenderQueue& _renderQueue )
+    void SystemProvider::queueRenderables( IRenderQueue& _renderQueue )
     {
         for ( ISystem* systemPtr : m_systemsToQueueRenderables )
         {
@@ -89,7 +89,7 @@ namespace puma
         }
     }
     
-    void SystemContainer::updateSystemsProperties()
+    void SystemProvider::updateSystemsProperties()
     {
         m_systemsToUpdate.clear();
         m_systemsToUpdatePrePhysics.clear();
