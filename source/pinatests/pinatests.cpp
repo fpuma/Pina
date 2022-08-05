@@ -1,15 +1,9 @@
-#include <utils/genericid.h>
+#include <gtest/gtest.h>
+#include <gmock/gmock.h>
 
-#include <bitset>
-#include <iostream>
-
-int main()
+int main( int argc, char* argv[] )
 {
-
-    std::bitset<100> bs;
-
-    bs[50] = true;
-
-    std::cout << bs;
-
+    ::testing::InitGoogleTest( &argc, argv );
+    ::RUN_ALL_TESTS();
+    return 0;
 }

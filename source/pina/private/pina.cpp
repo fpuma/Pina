@@ -1,6 +1,6 @@
-#include <pina/component/icomponent.h>
-#include <pina/component/componentprovider.h>
-#include <pina/entity/entity.h>
-#include <pina/entity/entityprovider.h>
-#include <pina/system/isystem.h>
-#include <pina/system/systemprovider.h>
+#include <pina/component.h>
+#include <pina/entity.h>
+#include <pina/isystem.h>
+#include <pina/private/componentprovider.h>
+#include <pina/private/entityprovider.h>
+#include <pina/private/systemprovider.h>

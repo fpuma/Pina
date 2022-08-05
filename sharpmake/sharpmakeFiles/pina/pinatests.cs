@@ -16,13 +16,9 @@ namespace Puma
 
             conf.AddPrivateDependency<Puma.Utils>(target);
             conf.AddPrivateDependency<Puma.GoogleTest>(target);
+            conf.AddPrivateDependency<Puma.Pina>(target);
 
             conf.Options.Add(Sharpmake.Options.Vc.General.TreatWarningsAsErrors.Enable);
-
-            if (target.Optimization != Sharpmake.Optimization.Debug)
-            {
-                conf.IsExcludedFromBuild = true;
-            }
         }
     }
 }

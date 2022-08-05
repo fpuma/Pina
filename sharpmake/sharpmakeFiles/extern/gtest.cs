@@ -3,7 +3,7 @@ namespace Puma
     [Sharpmake.Export]
     class GoogleTest : Puma.Common.IExternBinaries
     {
-        private static readonly string RelativeSourcePath = @"googletest-release-1.10.0";
+        private static readonly string RelativeSourcePath = @"googletest-release-1.12.1";
         public static readonly string FullExternSourcePath = Puma.SharpmakeUtils.GetExternPath() + @"\" + RelativeSourcePath;
 
         public GoogleTest()
@@ -21,10 +21,10 @@ namespace Puma
 
             if (target.Optimization == Sharpmake.Optimization.Debug)
             {
-                conf.LibraryFiles.Add(@"gmock_maind.lib");
-                conf.LibraryFiles.Add(@"gmockd.lib");
-                conf.LibraryFiles.Add(@"gtest_maind.lib");
-                conf.LibraryFiles.Add(@"gtestd.lib");
+                conf.LibraryFiles.Add(@"gmock_main_d.lib");
+                conf.LibraryFiles.Add(@"gmock_d.lib");
+                conf.LibraryFiles.Add(@"gtest_main_d.lib");
+                conf.LibraryFiles.Add(@"gtest_d.lib");
 
             }
             else
