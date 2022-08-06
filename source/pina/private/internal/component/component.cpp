@@ -1,8 +1,8 @@
 #pragma once
 
 #include <internal/component/componentimpl.h>
-#include <pina/component.h>
 #include <memory>
+#include <pina/component.h>
 
 namespace puma::pina
 {

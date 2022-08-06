@@ -1,23 +1,20 @@
 #include <pina/component.h>
 #include <utils/numerictypes.h>
 
-using namespace puma;
-using namespace puma::pina;
 
-
-class ComponentA : public Component
+class ComponentA : public puma::pina::Component
 {
 public:
 
-    u32 getNumber() const { return m_number; }
-    void setNumber( u32 _num ) { m_number = _num; }
+    puma::s32 getNumber() const { return m_number; }
+    void setNumber( puma::s32 _num ) { m_number = _num; }
 
 private:
 
-    u32 m_number = 0;
+    puma::s32 m_number = 0;
 };
 
-class ComponentB : public Component
+class ComponentB : public puma::pina::Component
 {
 public:
 
@@ -26,5 +23,5 @@ public:
 
 private:
 
-    float m_number = 0;
+    float m_number = 0.0f;
 };

@@ -1,8 +1,9 @@
 #pragma once
 
-#include <utils/containers/mappedrealizationcontainer.h>
 #include <pina/entity.h>
 #include <pina/component.h>
+#include <pina/system.h>
+#include <utils/containers/mappedrealizationcontainer.h>
 
 namespace puma::pina
 {
@@ -36,6 +37,7 @@ namespace puma::pina
 
         std::vector<EntityStatus> entities;
         puma::MappedRealizationContainer<Entity, Component> components;
+        puma::UniqueRealizationContainer<System> systems;
 
         //puma::MappedRealizationContainer<Entity, IComponentExtraData> componentsExtraData;
     };

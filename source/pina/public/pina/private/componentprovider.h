@@ -1,7 +1,7 @@
 #pragma once
 
-#include <pina/entity.h>
 #include <pina/component.h>
+#include <pina/entity.h>
 #include <pina/private/ecsdata.h>
 #include <utils/containers/mappedrealizationcontainer.h>
 #include <utils/noncopyable.h>
