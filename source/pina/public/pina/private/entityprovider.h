@@ -11,11 +11,11 @@ namespace puma::pina
     struct EcsData;
     class EntityProviderImpl;
 
-    class EntityProvider final : public puma::NonCopyable
+    class EntityProvider : public puma::NonCopyable
     {
     public:
         EntityProvider( EcsData& _data );
-        ~EntityProvider();
+        virtual ~EntityProvider();
         
         void init( puma::u32 _entityCount );
         void uninit();

@@ -15,7 +15,6 @@ namespace puma::pina
         System();
         virtual ~System();
 
-        virtual void update(EntityProvider& _entityProvider, ComponentProvider& _componentProvider, float _deltaTime) = 0;
         virtual void uninit() = 0;
 
         void enable();

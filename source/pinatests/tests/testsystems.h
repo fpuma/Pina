@@ -6,11 +6,18 @@
 
 #include <pina/ecs.h>
 
-class SystemA : public puma::pina::System
+class TestSystemBase :public puma::pina::System
 {
 public:
 
-    void update( puma::pina::EntityProvider& _entityProvider, puma::pina::ComponentProvider& _componentProvider, float _deltaTime ) override
+    virtual void update( puma::pina::EntityProvider& _entityProvider, puma::pina::ComponentProvider& _componentProvider ) = 0;
+};
+
+class SystemA : public TestSystemBase
+{
+public:
+
+    void update( puma::pina::EntityProvider& _entityProvider, puma::pina::ComponentProvider& _componentProvider ) override
     {
         for (puma::pina::Entity ntt : m_entities)
         {
@@ -35,11 +42,11 @@ private:
 
 };
 
-class SystemB : public puma::pina::System
+class SystemB : public TestSystemBase
 {
 public:
 
-    void update( puma::pina::EntityProvider& _entityProvider, puma::pina::ComponentProvider& _componentProvider, float _deltaTime ) override
+    void update( puma::pina::EntityProvider& _entityProvider, puma::pina::ComponentProvider& _componentProvider ) override
     {
         for (puma::pina::Entity ntt : m_entities)
         {
@@ -61,4 +68,21 @@ public:
 private:
 
     std::vector<puma::pina::Entity> m_entities;
+};
+
+class TestSystemProvider : public puma::pina::SystemProvider
+{
+public:
+
+    TestSystemProvider( puma::pina::EcsData& _data )
+        : puma::pina::SystemProvider( _data )
+    {}
+
+    void update( puma::pina::EntityProvider& _entityProvider, puma::pina::ComponentProvider& _componentProvider )
+    {
+        visit( [&]( std::shared_ptr<puma::pina::System> _system )
+            {
+                static_cast<TestSystemBase*>(_system.get())->update( _entityProvider, _componentProvider );
+            } );
+    }
 };

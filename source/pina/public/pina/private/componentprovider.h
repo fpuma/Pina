@@ -9,7 +9,7 @@
 
 namespace puma::pina
 {
-    class ComponentProvider final : public puma::NonCopyable
+    class ComponentProvider : public puma::NonCopyable
     {
     public:
         ComponentProvider( EcsData& _data )

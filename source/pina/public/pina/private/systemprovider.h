@@ -73,6 +73,12 @@ namespace puma::pina
         {
             m_ecsData.systems.visit( []( std::shared_ptr<System> sys ) { sys->uninit(); } );
         }
+    protected:
+
+        void visit( std::function<void( std::shared_ptr<System> sys )> _visitor )
+        {
+            m_ecsData.systems.visit( _visitor );
+        }
 
     private:
 
