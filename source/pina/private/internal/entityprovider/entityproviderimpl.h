@@ -18,13 +18,13 @@ namespace puma::pina
 
         Entity requestEntity();
 
-        void disposeEntity( const Entity& _entity );
+        void disposeEntity( Entity _entity );
 
-        void enableEntity( const Entity& _entity );
+        void enableEntity( Entity _entity );
 
-        void disableEntity( const Entity& _entity );
+        void disableEntity( Entity _entity );
 
-        bool isEntityEnabled( const Entity& _entity ) const;
+        bool isEntityEnabled( Entity _entity ) const;
 
     private:
 

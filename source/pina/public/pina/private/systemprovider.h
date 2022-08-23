@@ -76,6 +76,11 @@ namespace puma::pina
             m_ecsData.systems.visit( _visitor );
         }
 
+        System* getSystem ( std::type_index _idx ) { return m_ecsData.systems.get( _idx ); }
+        const System* getSystem ( std::type_index _idx ) const { return m_ecsData.systems.get( _idx ); }
+        std::shared_ptr<System> getSystemSafely ( std::type_index _idx ) { return m_ecsData.systems.getSafely( _idx ); }
+        std::shared_ptr<const System> getSystemSafely ( std::type_index _idx ) const { return m_ecsData.systems.getSafely( _idx ); }
+
     private:
 
         EcsData& m_ecsData;

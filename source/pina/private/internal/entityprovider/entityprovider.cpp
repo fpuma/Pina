@@ -24,22 +24,22 @@ namespace puma::pina
         return m_impl->requestEntity();
     }
 
-    void EntityProvider::disposeEntity( const Entity& _entity )
+    void EntityProvider::disposeEntity( Entity _entity )
     {
         m_impl->disposeEntity( _entity );
     }
 
-    void EntityProvider::enableEntity( const Entity& _entity )
+    void EntityProvider::enableEntity( Entity _entity )
     {
         m_impl->enableEntity( _entity );
     }
 
-    void EntityProvider::disableEntity( const Entity& _entity )
+    void EntityProvider::disableEntity( Entity _entity )
     {
         m_impl->disableEntity( _entity );
     }
 
-    bool EntityProvider::isEntityEnabled( const Entity& _entity ) const
+    bool EntityProvider::isEntityEnabled( Entity _entity ) const
     {
         return m_impl->isEntityEnabled( _entity );
     }

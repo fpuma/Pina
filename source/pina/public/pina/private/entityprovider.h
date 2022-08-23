@@ -20,10 +20,10 @@ namespace puma::pina
         void init( puma::u32 _entityCount );
         void uninit();
         Entity requestEntity();
-        void disposeEntity( const Entity& _entity );
-        void enableEntity( const Entity& _entity );
-        void disableEntity( const Entity& _entity );
-        bool isEntityEnabled( const Entity& _entity ) const;
+        void disposeEntity( Entity _entity );
+        void enableEntity( Entity _entity );
+        void disableEntity( Entity _entity );
+        bool isEntityEnabled( Entity _entity ) const;
 
     private:
 
