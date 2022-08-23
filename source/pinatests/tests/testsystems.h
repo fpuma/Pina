@@ -26,7 +26,7 @@ public:
         }
     }
 
-    void uninit() override
+    void uninit()
     {
         m_entities.clear();
     }
@@ -55,7 +55,7 @@ public:
         }
     }
 
-    void uninit() override
+    void uninit()
     {
         m_entities.clear();
     }

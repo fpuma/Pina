@@ -69,10 +69,6 @@ namespace puma::pina
             return m_ecsData.systems.contains<T>();
         }
 
-        void uninit()
-        {
-            m_ecsData.systems.visit( []( std::shared_ptr<System> sys ) { sys->uninit(); } );
-        }
     protected:
 
         void visit( std::function<void( std::shared_ptr<System> sys )> _visitor )
