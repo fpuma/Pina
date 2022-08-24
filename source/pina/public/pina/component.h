@@ -15,7 +15,8 @@ namespace puma::pina
         void enable();
         void disable();
         bool isEnabled() const;
-
+        virtual void onEnabled() {}
+        virtual void onDisabled() {}
     private:
 
         std::unique_ptr<ComponentImpl> m_impl;
