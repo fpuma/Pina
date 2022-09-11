@@ -15,6 +15,9 @@ namespace puma::pina
         System();
         virtual ~System();
 
+        virtual void onInit();
+        virtual void onUninit();
+
         void enable();
         void disable();
         bool isEnabled() const;

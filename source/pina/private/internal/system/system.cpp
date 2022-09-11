@@ -14,6 +14,16 @@ namespace puma::pina
 
     System::~System() {}
 
+    void System::onInit()
+    {
+
+    }
+
+    void System::onUninit()
+    {
+
+    }
+
     void System::enable()
     {
         m_impl->enable();

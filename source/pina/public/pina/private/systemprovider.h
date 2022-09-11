@@ -30,12 +30,16 @@ namespace puma::pina
         template<class T>
         std::shared_ptr<T> addSystem()
         {
-            return m_ecsData.systems.add<T>();
+            auto system = m_ecsData.systems.add<T>();
+            system->onInit();
+            return system;
         }
 
         template<class T>
         void removeSystem()
         {
+            auto system = getSystemSafely<T>();
+            system->onUninit();
             m_ecsData.systems.remove<T>();
         }
 
