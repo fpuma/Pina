@@ -13,7 +13,10 @@ namespace puma::pina
     {
     public:
         ECS() {}
-        virtual ~ECS() {}
+        virtual ~ECS()
+        {
+            uninit();
+        }
 
         template<class T = EntityProvider>
         void initEntities() { init<EntityProvider, T>( m_entities ); }
@@ -40,6 +43,13 @@ namespace puma::pina
             static_assert(std::is_base_of<Base, T>::value);
             assert( nullptr == _member ); // The member has already been initialized
             _member = std::make_unique<T>( m_data );
+        }
+
+        void uninit()
+        {
+            m_entities->uninit();
+            m_components->uninit();
+            m_systems->uninit();
         }
 
         std::unique_ptr<EntityProvider> m_entities = nullptr;

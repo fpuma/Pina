@@ -15,6 +15,12 @@ namespace puma::pina
 
         virtual ~SystemProvider() {}
 
+        void uninit()
+        {
+            assert( m_ecsData.systems.size() == 0 );
+            m_ecsData.systems.clear();
+        }
+
         template<class T>
         void registerSystem()
         {

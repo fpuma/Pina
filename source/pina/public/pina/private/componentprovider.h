@@ -18,6 +18,12 @@ namespace puma::pina
 
         virtual ~ComponentProvider() {}
 
+        void uninit()
+        {
+            assert( m_ecsData.components.size() == 0 ); // Not all components have been removed
+            m_ecsData.components.clear();
+        }
+
         template<class T>
         void registerComponent()
         {
