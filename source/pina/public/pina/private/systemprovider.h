@@ -17,7 +17,7 @@ namespace puma::pina
 
         void uninit()
         {
-            assert( m_ecsData.systems.size() == 0 );
+            assert( m_ecsData.systems.size() == 0 ); // Not all systems have been removed
             m_ecsData.systems.clear();
         }
 
