@@ -1,5 +1,5 @@
-#include <internal/entityprovider/entityproviderimpl.h>
-#include <pina/private/entityprovider.h>
+#include <pina/providers/entityprovider.h>
+#include <internal/entity/entityproviderimpl.h>
 
 namespace puma::pina
 {

@@ -4,6 +4,10 @@
 #include "testcomponents.h"
 #include <vector>
 
+#include <pina/providers/componentprovider.h>
+#include <pina/providers/systemprovider.h>
+#include <pina/providers/entityprovider.h>
+
 #include <pina/ecs.h>
 
 class TestSystemBase :public puma::pina::System

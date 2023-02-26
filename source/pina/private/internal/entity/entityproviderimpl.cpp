@@ -1,5 +1,5 @@
 #include <algorithm>
-#include <internal/entityprovider/entityproviderimpl.h>
+#include <internal/entity/entityproviderimpl.h>
 
 namespace puma::pina
 {
@@ -62,10 +62,10 @@ namespace puma::pina
                 component->enable();
             } );
 
-        for (const ComponentIndex& compIdx : m_ecsData.entityAssignedComponents.at(_entity))
-        {
+        //for (const ComponentIndex& compIdx : m_ecsData.entityAssignedComponents.at(_entity))
+        //{
 
-        }
+        //}
 
     }
 

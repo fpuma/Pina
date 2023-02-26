@@ -1,34 +1,34 @@
 #pragma once
 
-#include <pina/private/ecsdata.h>
+#include <memory>
+#include <pina/entity.h>
+//#include <pina/providers/ecsdata.h>
+#include <utils/noncopyable.h>
 #include <utils/numerictypes.h>
 
 namespace puma::pina
 {
-    class EntityProviderImpl
+    struct EcsData;
+    class EntityProviderImpl;
+
+    class EntityProvider : public puma::NonCopyable
     {
     public:
-
-        EntityProviderImpl( EcsData& _data );
-        ~EntityProviderImpl();
-
+        EntityProvider( EcsData& _data );
+        virtual ~EntityProvider();
+        
         void init( puma::u32 _entityCount );
-
         void uninit();
-
         Entity requestEntity();
-
         void disposeEntity( Entity _entity );
-
         void enableEntity( Entity _entity );
-
         void disableEntity( Entity _entity );
-
         bool isEntityEnabled( Entity _entity ) const;
 
     private:
 
-        EcsData& m_ecsData;
-
+        std::unique_ptr<EntityProviderImpl> m_impl;
     };
+
+
 }

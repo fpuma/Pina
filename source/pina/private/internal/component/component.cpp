@@ -1,5 +1,3 @@
-#pragma once
-
 #include <internal/component/componentimpl.h>
 #include <memory>
 #include <pina/component.h>

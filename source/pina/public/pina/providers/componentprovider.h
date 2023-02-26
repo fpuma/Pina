@@ -2,7 +2,7 @@
 
 #include <pina/component.h>
 #include <pina/entity.h>
-#include <pina/private/ecsdata.h>
+#include <pina/providers/ecsdata.h>
 #include <utils/containers/mappedrealizationcontainer.h>
 #include <utils/noncopyable.h>
 #include <iterator>

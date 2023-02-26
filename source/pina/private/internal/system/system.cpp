@@ -1,5 +1,3 @@
-#pragma once
-
 #include <internal/system/systemimpl.h>
 #include <memory>
 #include <pina/system.h>

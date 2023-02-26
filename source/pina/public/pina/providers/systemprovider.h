@@ -1,7 +1,8 @@
 #pragma once
 
-#include <pina/private/ecsdata.h>
+#include <pina/providers/ecsdata.h>
 #include <utils/containers/uniquerealizationcontainer.h>
+#include <utils/noncopyable.h>
 
 namespace puma::pina
 {
@@ -9,11 +10,8 @@ namespace puma::pina
     {
     public:
 
-        SystemProvider( EcsData& _data )
-            : m_ecsData( _data )
-        {}
-
-        virtual ~SystemProvider() {}
+        SystemProvider( EcsData& _data );
+        virtual ~SystemProvider();
 
         void uninit()
         {

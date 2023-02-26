@@ -10,7 +10,7 @@ TEST( ECS, Tests )
 
     ecs.initEntities();
     ecs.initComponents();
-    ecs.initSystems<TestSystemProvider>();
+    ecs.initSystems( std::make_unique<TestSystemProvider>(ecs.getEcsData()) );
 
     puma::pina::EntityProvider* nttProvider = ecs.getEntityProvider();
     puma::pina::ComponentProvider* componentProvider = ecs.getComponentProvider();
