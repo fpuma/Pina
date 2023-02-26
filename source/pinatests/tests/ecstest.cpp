@@ -87,4 +87,36 @@ TEST( ECS, Tests )
 
     EXPECT_EQ( 2, ca2->getNumber() );
     EXPECT_EQ( 2, cb2->getNumber() );
+
+
+    //ENTITIES BY COMPONENTS
+    auto ntts = componentProvider->getEntitesByComponents<ComponentA, ComponentB>();
+    EXPECT_EQ( ntts.size(), 1 );
+    EXPECT_EQ( *ntts.begin(), entity2);
+
+    componentProvider->addComponent<ComponentA>( entity3 );
+    ntts = componentProvider->getEntitesByComponents<ComponentA, ComponentB>();
+
+    EXPECT_EQ( ntts.size(), 2 );
+    auto nttsBegin = ntts.begin();
+    EXPECT_EQ( *nttsBegin, entity2 );
+    std::advance( nttsBegin, 1 );
+    EXPECT_EQ( *nttsBegin, entity3 );
+
+
+    //UNINIT
+    componentProvider->removeComponent<ComponentA>( entity0 );
+    componentProvider->removeComponent<ComponentA>( entity1 );
+    componentProvider->removeComponent<ComponentA>( entity2 );
+    componentProvider->removeComponent<ComponentB>( entity2 );
+    componentProvider->removeComponent<ComponentA>( entity3 );
+    componentProvider->removeComponent<ComponentB>( entity3 );
+
+    nttProvider->disposeEntity( entity0 );
+    nttProvider->disposeEntity( entity1 );
+    nttProvider->disposeEntity( entity2 );
+    nttProvider->disposeEntity( entity3 );
+
+    systemProvider->removeSystem<SystemA>();
+    systemProvider->removeSystem<SystemB>();
 }

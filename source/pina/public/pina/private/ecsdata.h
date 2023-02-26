@@ -4,26 +4,11 @@
 #include <pina/component.h>
 #include <pina/system.h>
 #include <utils/containers/mappedrealizationcontainer.h>
+#include <map>
+#include <set>
 
 namespace puma::pina
 {
-    //Currently we don't exactly need extra internal info for components, but for when we do I am leaving this as reference just in case I forget
-    // 
-    //class IComponentExtraData
-    //{
-    //public:
-    //    ~IComponentExtraData() {}
-    //};
-
-    //template<class T>
-    //class ComponentExtraData : public IComponentExtraData
-    //{
-    //public:
-
-    //    bool enabled = true;
-    //    bool entityEnabled = true;
-    //};
-
     enum class EntityStatus
     {
         Enabled,
@@ -32,6 +17,8 @@ namespace puma::pina
         Disposed,
     };
 
+    using ComponentIndex = std::type_index;
+
     struct EcsData
     {
 
@@ -39,6 +26,7 @@ namespace puma::pina
         puma::MappedRealizationContainer<Entity, Component> components;
         puma::UniqueRealizationContainer<System> systems;
 
-        //puma::MappedRealizationContainer<Entity, IComponentExtraData> componentsExtraData;
+        std::unordered_map<ComponentIndex, std::set<Entity>> entitiesEnabledComponents; //This is to keep track the enabled components on entities
+        std::unordered_map<Entity, std::set<ComponentIndex>> entityAssignedComponents; //This is to keep track of the actual components assigned to entities
     };
 }

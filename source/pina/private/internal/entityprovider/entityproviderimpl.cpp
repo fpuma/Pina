@@ -54,12 +54,19 @@ namespace puma::pina
     void EntityProviderImpl::enableEntity( Entity _entity )
     {
         assert( m_ecsData.entities[_entity.value()] != EntityStatus::Unassigned );
+        assert( m_ecsData.entityAssignedComponents.contains( _entity ) );
         m_ecsData.entities[_entity.value()] = EntityStatus::Enabled;
 
         m_ecsData.components.visit( _entity, []( std::shared_ptr<Component> component )
             {
                 component->enable();
             } );
+
+        for (const ComponentIndex& compIdx : m_ecsData.entityAssignedComponents.at(_entity))
+        {
+
+        }
+
     }
 
     void EntityProviderImpl::disableEntity( Entity _entity )
