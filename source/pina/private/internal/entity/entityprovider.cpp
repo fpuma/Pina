@@ -1,4 +1,4 @@
-#include <pina/providers/entityprovider.h>
+#include <pina/hidden/entityprovider.h>
 #include <internal/entity/entityproviderimpl.h>
 
 namespace puma::pina

@@ -7,7 +7,6 @@ namespace puma::pina
     class EcsImpl;
     class EntityProvider;
     class ComponentProvider;
-    class SystemProvider;
 
     //REMOVE
     struct EcsData;
@@ -18,17 +17,11 @@ namespace puma::pina
         ECS();
         virtual ~ECS();
 
-        void initEntities( std::unique_ptr<EntityProvider> _entityProvider = nullptr );
-        void initComponents( std::unique_ptr<ComponentProvider> _componentProvider = nullptr );
-        void initSystems( std::unique_ptr<SystemProvider> _systemProvider = nullptr );
-
         EntityProvider* getEntityProvider();
         ComponentProvider* getComponentProvider();
-        SystemProvider* getSystemProvider();
 
         const EntityProvider* getEntityProvider()       const;
         const ComponentProvider* getComponentProvider() const;
-        const SystemProvider* getSystemProvider()       const;
 
         //REMOVE
         EcsData& getEcsData();

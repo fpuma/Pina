@@ -2,7 +2,6 @@
 
 #include <memory>
 #include <pina/entity.h>
-//#include <pina/providers/ecsdata.h>
 #include <utils/noncopyable.h>
 #include <utils/numerictypes.h>
 
@@ -11,13 +10,13 @@ namespace puma::pina
     struct EcsData;
     class EntityProviderImpl;
 
-    class EntityProvider : public puma::NonCopyable
+    class EntityProvider final : public NonCopyable
     {
     public:
         EntityProvider( EcsData& _data );
         virtual ~EntityProvider();
         
-        void init( puma::u32 _entityCount );
+        void init( u32 _entityCount );
         void uninit();
         Entity requestEntity();
         void disposeEntity( Entity _entity );

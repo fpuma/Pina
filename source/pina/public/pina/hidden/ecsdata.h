@@ -2,7 +2,6 @@
 
 #include <pina/entity.h>
 #include <pina/component.h>
-#include <pina/system.h>
 #include <utils/containers/mappedrealizationcontainer.h>
 #include <map>
 #include <set>
@@ -23,8 +22,6 @@ namespace puma::pina
     {
 
         std::vector<EntityStatus> entities;
-        puma::MappedRealizationContainer<Entity, Component> components;
-        puma::UniqueRealizationContainer<System> systems;
 
         std::unordered_map<ComponentIndex, std::set<Entity>> entitiesEnabledComponents; //This is to keep track the enabled components on entities
         std::unordered_map<Entity, std::set<ComponentIndex>> entityAssignedComponents; //This is to keep track of the actual components assigned to entities

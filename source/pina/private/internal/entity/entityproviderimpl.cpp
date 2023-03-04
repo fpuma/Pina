@@ -57,10 +57,10 @@ namespace puma::pina
         assert( m_ecsData.entityAssignedComponents.contains( _entity ) );
         m_ecsData.entities[_entity.value()] = EntityStatus::Enabled;
 
-        m_ecsData.components.visit( _entity, []( std::shared_ptr<Component> component )
-            {
-                component->enable();
-            } );
+        //m_ecsData.components.visit( _entity, []( std::shared_ptr<Component> component )
+        //    {
+        //        component->enable();
+        //    } );
 
         //for (const ComponentIndex& compIdx : m_ecsData.entityAssignedComponents.at(_entity))
         //{
@@ -74,10 +74,14 @@ namespace puma::pina
         assert( m_ecsData.entities[_entity.value()] != EntityStatus::Unassigned );
         m_ecsData.entities[_entity.value()] = EntityStatus::Disabled;
 
-        m_ecsData.components.visit( _entity, []( std::shared_ptr<Component> component )
-            {
-                component->disable();
-            } );
+        //if (m_ecsData.components.contains( _entity ))
+        //{
+        //    m_ecsData.components.visit( _entity, []( std::shared_ptr<Component> component )
+        //        {
+        //            component->disable();
+        //        } );
+        //}
+
     }
 
     bool EntityProviderImpl::isEntityEnabled( Entity _entity ) const

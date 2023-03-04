@@ -1,6 +1,6 @@
 #pragma once
 
-#include <pina/providers/ecsdata.h>
+#include <pina/hidden/ecsdata.h>
 #include <utils/numerictypes.h>
 
 namespace puma::pina
