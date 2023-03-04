@@ -40,11 +40,4 @@ namespace puma::pina
         assert( nullptr != m_ecsImpl->getComponentProvider() );
         return m_ecsImpl->getComponentProvider();
     }
-    
-    //REMOVE
-    EcsData& ECS::getEcsData()
-    {
-        return m_ecsImpl->getEcsData();
-    }
-
 }

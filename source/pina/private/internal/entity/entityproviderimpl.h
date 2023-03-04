@@ -9,8 +9,8 @@ namespace puma::pina
     {
     public:
 
-        EntityProviderImpl( EcsData& _data );
-        ~EntityProviderImpl();
+        EntityProviderImpl() = default;
+        ~EntityProviderImpl() = default;
 
         void init( puma::u32 _entityCount );
 
@@ -28,7 +28,6 @@ namespace puma::pina
 
     private:
 
-        EcsData& m_ecsData;
-
+        std::vector<EntityStatus> m_entities;
     };
 }

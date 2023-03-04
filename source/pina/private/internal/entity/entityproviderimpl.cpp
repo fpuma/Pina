@@ -3,43 +3,36 @@
 
 namespace puma::pina
 {
-    EntityProviderImpl::EntityProviderImpl( EcsData& _data )
-        : m_ecsData( _data )
-    {}
-    
-    EntityProviderImpl::~EntityProviderImpl()
-    {}
-
     void EntityProviderImpl::init( puma::u32 _entityCount )
     {
-        m_ecsData.entities.resize( _entityCount );
+        m_entities.resize( _entityCount );
     }
 
     void EntityProviderImpl::uninit()
     {
-        assert( std::all_of( m_ecsData.entities.begin(), m_ecsData.entities.end(), []( const EntityStatus& _status )
+        assert( std::all_of( m_entities.begin(), m_entities.end(), []( const EntityStatus& _status )
             {
                 return _status == EntityStatus::Unassigned;
             } ) );
 
-        m_ecsData.entities.clear();
+        m_entities.clear();
     }
 
     Entity EntityProviderImpl::requestEntity()
     {
         Entity result;
 
-        auto itFoundEntity = std::find( m_ecsData.entities.begin(), m_ecsData.entities.end(), EntityStatus::Unassigned );
+        auto itFoundEntity = std::find( m_entities.begin(), m_entities.end(), EntityStatus::Unassigned );
 
-        if (m_ecsData.entities.end() != itFoundEntity)
+        if (m_entities.end() != itFoundEntity)
         {
-            result = Entity( std::distance( m_ecsData.entities.begin(), itFoundEntity ) );
+            result = Entity( std::distance( m_entities.begin(), itFoundEntity ) );
             *itFoundEntity = EntityStatus::Enabled;
         }
         else
         {
-            result = Entity( m_ecsData.entities.size() );
-            m_ecsData.entities.push_back( EntityStatus::Enabled );
+            result = Entity( m_entities.size() );
+            m_entities.push_back( EntityStatus::Enabled );
         }
 
         return result;
@@ -47,15 +40,15 @@ namespace puma::pina
 
     void EntityProviderImpl::disposeEntity( Entity _entity )
     {
-        assert( m_ecsData.entities[_entity.value()] != EntityStatus::Unassigned );
-        m_ecsData.entities[_entity.value()] = EntityStatus::Unassigned;
+        assert( m_entities[_entity.value()] != EntityStatus::Unassigned );
+        m_entities[_entity.value()] = EntityStatus::Unassigned;
     }
 
     void EntityProviderImpl::enableEntity( Entity _entity )
     {
-        assert( m_ecsData.entities[_entity.value()] != EntityStatus::Unassigned );
-        assert( m_ecsData.entityAssignedComponents.contains( _entity ) );
-        m_ecsData.entities[_entity.value()] = EntityStatus::Enabled;
+        assert( m_entities[_entity.value()] != EntityStatus::Unassigned );
+        //assert( m_ecsData.entityAssignedComponents.contains( _entity ) );
+        m_entities[_entity.value()] = EntityStatus::Enabled;
 
         //m_ecsData.components.visit( _entity, []( std::shared_ptr<Component> component )
         //    {
@@ -71,8 +64,8 @@ namespace puma::pina
 
     void EntityProviderImpl::disableEntity( Entity _entity )
     {
-        assert( m_ecsData.entities[_entity.value()] != EntityStatus::Unassigned );
-        m_ecsData.entities[_entity.value()] = EntityStatus::Disabled;
+        assert( m_entities[_entity.value()] != EntityStatus::Unassigned );
+        m_entities[_entity.value()] = EntityStatus::Disabled;
 
         //if (m_ecsData.components.contains( _entity ))
         //{
@@ -86,7 +79,7 @@ namespace puma::pina
 
     bool EntityProviderImpl::isEntityEnabled( Entity _entity ) const
     {
-        assert( m_ecsData.entities[_entity.value()] != EntityStatus::Unassigned );
-        return m_ecsData.entities[_entity.value()] == EntityStatus::Enabled;
+        assert( m_entities[_entity.value()] != EntityStatus::Unassigned );
+        return m_entities[_entity.value()] == EntityStatus::Enabled;
     }
 }

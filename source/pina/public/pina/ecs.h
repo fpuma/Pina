@@ -8,9 +8,6 @@ namespace puma::pina
     class EntityProvider;
     class ComponentProvider;
 
-    //REMOVE
-    struct EcsData;
-
     class ECS
     {
     public:
@@ -22,9 +19,6 @@ namespace puma::pina
 
         const EntityProvider* getEntityProvider()       const;
         const ComponentProvider* getComponentProvider() const;
-
-        //REMOVE
-        EcsData& getEcsData();
 
     private:
 

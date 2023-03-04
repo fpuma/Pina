@@ -13,7 +13,7 @@ namespace puma::pina
     class EntityProvider final : public NonCopyable
     {
     public:
-        EntityProvider( EcsData& _data );
+        EntityProvider();
         virtual ~EntityProvider();
         
         void init( u32 _entityCount );

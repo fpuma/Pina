@@ -22,9 +22,6 @@ namespace puma::pina
 
 		void uninit();
 
-		//Exposing this to make it compile for now
-		EcsData& getEcsData() { return m_data; }
-
 	private:
 
 		std::unique_ptr<EntityProvider> m_entities;// = nullptr;

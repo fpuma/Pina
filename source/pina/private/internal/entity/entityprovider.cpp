@@ -3,10 +3,11 @@
 
 namespace puma::pina
 {
-    EntityProvider::EntityProvider( EcsData& _data )
+    EntityProvider::EntityProvider()
     {
-        m_impl = std::make_unique<EntityProviderImpl>( _data );
+        m_impl = std::make_unique<EntityProviderImpl>();
     }
+
     EntityProvider::~EntityProvider() {}
 
     void EntityProvider::init( puma::u32 _entityCount )

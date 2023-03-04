@@ -8,7 +8,7 @@ namespace puma::pina
 {
 
 	EcsImpl::EcsImpl()
-		: m_entities(std::make_unique<EntityProvider>(m_data))
+		: m_entities(std::make_unique<EntityProvider>())
 		, m_components( std::make_unique<ComponentProvider>( m_data ) )
 	{}
 
