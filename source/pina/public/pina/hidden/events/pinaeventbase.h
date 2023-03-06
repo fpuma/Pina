@@ -1,3 +1,5 @@
+#pragma once
+
 #include <utils/events/ievent.h>
 
 namespace puma::pina
@@ -14,11 +16,12 @@ namespace puma::pina
 		ComponentDisabled,
 	};
 
-	class PinaEvent : public IEvent
+	class PinaEventBase : public IEvent
 	{
 	public:
 
-		PinaEvent( PinaEventType _type ) : m_type( _type ) {}
+		PinaEventBase( PinaEventType _type ) : m_type( _type ) {}
+		virtual ~PinaEventBase() = default;
 
 		PinaEventType getType() const { return m_type; }
 

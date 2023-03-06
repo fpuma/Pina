@@ -3,14 +3,20 @@
 #include <pina/hidden/componentprovider.h>
 #include <pina/hidden/ecsdata.h>
 #include <pina/hidden/entityprovider.h>
+#include <pina/hidden/events/pinaeventmanager.h>
+
+#include <utils/defaultinstance.h>
 
 namespace puma::pina
 {
 
 	EcsImpl::EcsImpl()
 		: m_entities(std::make_unique<EntityProvider>())
-		, m_components( std::make_unique<ComponentProvider>( m_data ) )
-	{}
+		, m_components( std::make_unique<ComponentProvider>() )
+		, m_eventManager( std::make_unique<PinaEventManager>() )
+	{
+		DefaultInstance<PinaEventManager>::setInstance( m_eventManager.get() );
+	}
 
 	EcsImpl::~EcsImpl() {}
 

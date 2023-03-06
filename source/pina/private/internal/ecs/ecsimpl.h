@@ -1,11 +1,12 @@
 #pragma once
 
-#include <pina/hidden/ecsdata.h>
+#include <memory>
 
 namespace puma::pina
 {
 	class EntityProvider;
 	class ComponentProvider;
+	class PinaEventManager;
 
 	class EcsImpl
 	{
@@ -24,10 +25,9 @@ namespace puma::pina
 
 	private:
 
-		std::unique_ptr<EntityProvider> m_entities;// = nullptr;
-		std::unique_ptr<ComponentProvider> m_components;// = nullptr;
-
-		EcsData m_data;
+		std::unique_ptr<EntityProvider> m_entities;
+		std::unique_ptr<ComponentProvider> m_components;
+		std::unique_ptr<PinaEventManager> m_eventManager;
 
 	};
 }

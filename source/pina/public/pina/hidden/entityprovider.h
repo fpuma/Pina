@@ -1,9 +1,10 @@
 #pragma once
 
-#include <memory>
 #include <pina/entity.h>
 #include <utils/noncopyable.h>
 #include <utils/numerictypes.h>
+
+#include <memory>
 
 namespace puma::pina
 {
