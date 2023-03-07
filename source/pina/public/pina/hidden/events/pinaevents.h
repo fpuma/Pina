@@ -3,6 +3,7 @@
 #include "pinaeventbase.h"
 
 #include <pina/entity.h>
+
 #include <typeindex>
 
 namespace puma::pina

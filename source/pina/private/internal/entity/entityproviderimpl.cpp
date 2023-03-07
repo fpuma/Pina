@@ -1,5 +1,11 @@
-#include <algorithm>
 #include <internal/entity/entityproviderimpl.h>
+
+#include <pina/hidden/events/pinaeventmanager.h>
+#include <pina/hidden/events/pinaevents.h>
+#include <utils/defaultinstance.h>
+
+#include <algorithm>
+#include <assert.h>
 
 namespace puma::pina
 {
@@ -34,7 +40,7 @@ namespace puma::pina
             result = Entity( m_entities.size() );
             m_entities.push_back( EntityStatus::Enabled );
         }
-
+        DefaultInstance<PinaEventManager>::getInstance()->executeEvent( EntityAddedEvent( result ) );
         return result;
     }
 
@@ -42,18 +48,17 @@ namespace puma::pina
     {
         assert( m_entities[_entity.value()] != EntityStatus::Unassigned );
         m_entities[_entity.value()] = EntityStatus::Unassigned;
+        DefaultInstance<PinaEventManager>::getInstance()->executeEvent( EntityRemovedEvent( _entity ) );
     }
 
     void EntityProviderImpl::enableEntity( Entity _entity )
     {
         assert( m_entities[_entity.value()] != EntityStatus::Unassigned );
-        //assert( m_ecsData.entityAssignedComponents.contains( _entity ) );
         m_entities[_entity.value()] = EntityStatus::Enabled;
+        DefaultInstance<PinaEventManager>::getInstance()->executeEvent( EntityEnabledEvent( _entity ) );
 
-        //m_ecsData.components.visit( _entity, []( std::shared_ptr<Component> component )
-        //    {
-        //        component->enable();
-        //    } );
+
+
 
         //for (const ComponentIndex& compIdx : m_ecsData.entityAssignedComponents.at(_entity))
         //{
@@ -66,6 +71,7 @@ namespace puma::pina
     {
         assert( m_entities[_entity.value()] != EntityStatus::Unassigned );
         m_entities[_entity.value()] = EntityStatus::Disabled;
+        DefaultInstance<PinaEventManager>::getInstance()->executeEvent( EntityDisabledEvent( _entity ) );
 
         //if (m_ecsData.components.contains( _entity ))
         //{

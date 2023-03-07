@@ -8,7 +8,6 @@
 
 namespace puma::pina
 {
-    struct EcsData;
     class EntityProviderImpl;
 
     class EntityProvider final : public NonCopyable

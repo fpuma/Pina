@@ -10,6 +10,8 @@ namespace puma::pina
     {
     public:
 
+        friend class ComponentProvider;
+
         Component();
         virtual ~Component();
         void enable();

@@ -3,7 +3,6 @@
 #include <pina/entity.h>
 #include <pina/hidden/ecsdata.h>
 
-#include <memory>
 #include <set>
 
 namespace puma::pina
@@ -27,14 +26,11 @@ namespace puma::pina
         template<class... Comps>
         std::set<Entity> getEntitesByComponents() const
         {
-            std::set<Entity> result;
-            InternalEntitesByComponents<Comps...>::get( result, m_data );
-            return result;
+            return m_data.getEntitesByComponents<Comps...>();
         }
 
     private:
 
-        std::unique_ptr<EcsImpl> m_ecsImpl;
         EcsData m_data;
     };
 

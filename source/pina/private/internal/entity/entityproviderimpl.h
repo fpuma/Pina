@@ -1,10 +1,18 @@
 #pragma once
 
-#include <pina/hidden/ecsdata.h>
+#include <pina/entity.h>
 #include <utils/numerictypes.h>
 
 namespace puma::pina
 {
+    enum class EntityStatus
+    {
+        Enabled,
+        Disabled,
+        Unassigned,
+        Disposed,
+    };
+
     class EntityProviderImpl
     {
     public:
