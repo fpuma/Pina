@@ -16,10 +16,21 @@ namespace puma::pina
         , m_eventManager( std::make_unique<PinaEventManager>() )
     {
         DefaultInstance<PinaEventManager>::setInstance( m_eventManager.get() );
+
+        m_eventManager->registerListener<EntityAddedEvent>( this );
+        m_eventManager->registerListener<EntityRemovedEvent>( this );
+        m_eventManager->registerListener<EntityEnabledEvent>( this );
+        m_eventManager->registerListener<EntityDisabledEvent>( this );
+
+        m_eventManager->registerListener<ComponentAddedEvent>( this );
+        m_eventManager->registerListener<ComponentRemovedEvent>( this );
+        m_eventManager->registerListener<ComponentEnabledEvent>( this );
+        m_eventManager->registerListener<ComponentDisabledEvent>( this );
     }
 
     EcsData::~EcsData()
     {
+        DefaultInstance<PinaEventManager>::clear();
         uninit();
     }
 
@@ -54,21 +65,26 @@ namespace puma::pina
             const auto& entityRemovedEvent = static_cast<const EntityRemovedEvent&>(_event);
             Entity removedEntity = entityRemovedEvent.getEntity();
             assert( m_assignedComponentsMap.contains( removedEntity ) ); //This map should contain an element with this entity as a key
-            
+
             if (m_assignedComponentsMap.contains( removedEntity ))
             {
                 auto& componentList = m_assignedComponentsMap.at( removedEntity );
-                assert( componentList.empty() ); //Not all components have been removed from this entity
-                componentList.clear();
-                m_assignedComponentsMap.erase( removedEntity );
+                for (const ComponentIndex& componentIndex : componentList)
+                {
+                    m_components->remove( removedEntity, componentIndex );
+                }
+
+                //assert( componentList.empty() ); //Not all components have been removed from this entity
+                //componentList.clear();
+                //m_assignedComponentsMap.erase( removedEntity );
             }
 
-            for (auto& componentEntitiesMap : m_enabledComponentsMap)
-            {
-                auto& entitiesList = componentEntitiesMap.second;
-                assert( !entitiesList.contains( removedEntity ) ); //Not all components have been removed from this entity
-                entitiesList.erase( removedEntity );
-            }
+            //for (auto& componentEntitiesMap : m_enabledComponentsMap)
+            //{
+            //    auto& entitiesList = componentEntitiesMap.second;
+            //    assert( !entitiesList.contains( removedEntity ) ); //Not all components have been removed from this entity
+            //    entitiesList.erase( removedEntity );
+            //}
 
             break;
         }

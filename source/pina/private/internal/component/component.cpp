@@ -29,4 +29,9 @@ namespace puma::pina
         return m_impl->isEnabled();
     }
 
+    Entity Component::getOwnerEntity() const
+    {
+        return m_impl->getEntity();
+    }
+
 }

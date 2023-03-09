@@ -9,6 +9,14 @@
 
 namespace puma::pina
 {
+    EntityProviderImpl::~EntityProviderImpl()
+    {
+        assert( std::all_of( m_entities.begin(), m_entities.end(), []( const EntityStatus& _status )
+            {
+                return _status == EntityStatus::Unassigned;
+            } ) ); // Not all entities have been disposed
+    }
+
     void EntityProviderImpl::init( puma::u32 _entityCount )
     {
         m_entities.resize( _entityCount );
@@ -16,12 +24,15 @@ namespace puma::pina
 
     void EntityProviderImpl::uninit()
     {
-        assert( std::all_of( m_entities.begin(), m_entities.end(), []( const EntityStatus& _status )
+        int nttIndex = 0;
+        for (EntityStatus& nttState : m_entities)
+        {
+            if (EntityStatus::Unassigned != nttState)
             {
-                return _status == EntityStatus::Unassigned;
-            } ) );
-
-        m_entities.clear();
+                disposeEntity( Entity( nttIndex ) );
+            }
+            ++nttIndex;
+        }
     }
 
     Entity EntityProviderImpl::requestEntity()
@@ -46,46 +57,40 @@ namespace puma::pina
 
     void EntityProviderImpl::disposeEntity( Entity _entity )
     {
-        assert( m_entities[_entity.value()] != EntityStatus::Unassigned );
-        m_entities[_entity.value()] = EntityStatus::Unassigned;
-        DefaultInstance<PinaEventManager>::getInstance()->executeEvent( EntityRemovedEvent( _entity ) );
+        EntityStatus& entityState = m_entities[_entity.value()];
+        assert( entityState != EntityStatus::Unassigned ); //Entity has been already disposed
+        if (EntityStatus::Unassigned != entityState)
+        {
+            entityState = EntityStatus::Unassigned;
+            DefaultInstance<PinaEventManager>::getInstance()->executeEvent( EntityRemovedEvent( _entity ) );
+        }
     }
 
     void EntityProviderImpl::enableEntity( Entity _entity )
     {
-        assert( m_entities[_entity.value()] != EntityStatus::Unassigned );
-        m_entities[_entity.value()] = EntityStatus::Enabled;
-        DefaultInstance<PinaEventManager>::getInstance()->executeEvent( EntityEnabledEvent( _entity ) );
-
-
-
-
-        //for (const ComponentIndex& compIdx : m_ecsData.entityAssignedComponents.at(_entity))
-        //{
-
-        //}
-
+        EntityStatus& entityState = m_entities[_entity.value()];
+        assert( entityState != EntityStatus::Unassigned ); //Entity has been already disposed
+        if (EntityStatus::Enabled != entityState)
+        {
+            entityState = EntityStatus::Enabled;
+            DefaultInstance<PinaEventManager>::getInstance()->executeEvent( EntityEnabledEvent( _entity ) );
+        }
     }
 
     void EntityProviderImpl::disableEntity( Entity _entity )
     {
-        assert( m_entities[_entity.value()] != EntityStatus::Unassigned );
-        m_entities[_entity.value()] = EntityStatus::Disabled;
-        DefaultInstance<PinaEventManager>::getInstance()->executeEvent( EntityDisabledEvent( _entity ) );
-
-        //if (m_ecsData.components.contains( _entity ))
-        //{
-        //    m_ecsData.components.visit( _entity, []( std::shared_ptr<Component> component )
-        //        {
-        //            component->disable();
-        //        } );
-        //}
-
+        EntityStatus& entityState = m_entities[_entity.value()];
+        assert( entityState != EntityStatus::Unassigned ); //Entity has been already disposed
+        if (EntityStatus::Disabled != entityState)
+        {
+            entityState = EntityStatus::Disabled;
+            DefaultInstance<PinaEventManager>::getInstance()->executeEvent( EntityDisabledEvent( _entity ) );
+        }
     }
 
     bool EntityProviderImpl::isEntityEnabled( Entity _entity ) const
     {
-        assert( m_entities[_entity.value()] != EntityStatus::Unassigned );
+        assert( m_entities[_entity.value()] != EntityStatus::Unassigned ); //Entity has been already disposed
         return m_entities[_entity.value()] == EntityStatus::Enabled;
     }
 }

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <pina/entity.h>
+
 #include <memory>
 
 namespace puma::pina
@@ -17,6 +19,7 @@ namespace puma::pina
         void enable();
         void disable();
         bool isEnabled() const;
+        Entity getOwnerEntity() const;
         virtual void onEnabled() {}
         virtual void onDisabled() {}
     private:

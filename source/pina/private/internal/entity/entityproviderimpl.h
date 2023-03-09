@@ -7,18 +7,18 @@ namespace puma::pina
 {
     enum class EntityStatus
     {
+        Unassigned,
         Enabled,
         Disabled,
-        Unassigned,
-        Disposed,
+        //Disposed, //I plan to use this state in case we want to debug if a disposed entity is being reused
     };
 
-    class EntityProviderImpl
+    class EntityProviderImpl final
     {
     public:
 
         EntityProviderImpl() = default;
-        ~EntityProviderImpl() = default;
+        ~EntityProviderImpl();
 
         void init( puma::u32 _entityCount );
 
