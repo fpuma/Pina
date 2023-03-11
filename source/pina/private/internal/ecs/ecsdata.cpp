@@ -30,8 +30,8 @@ namespace puma::pina
 
     EcsData::~EcsData()
     {
+        //uninit();
         DefaultInstance<PinaEventManager>::clear();
-        uninit();
     }
 
     EntityProvider* EcsData::getEntityProvider() { return m_entities.get(); }
@@ -73,10 +73,7 @@ namespace puma::pina
                 {
                     m_components->remove( removedEntity, componentIndex );
                 }
-
-                //assert( componentList.empty() ); //Not all components have been removed from this entity
-                //componentList.clear();
-                //m_assignedComponentsMap.erase( removedEntity );
+                m_assignedComponentsMap.erase( removedEntity );
             }
 
             //for (auto& componentEntitiesMap : m_enabledComponentsMap)

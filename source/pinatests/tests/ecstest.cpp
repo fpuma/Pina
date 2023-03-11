@@ -38,9 +38,18 @@ TEST( ECS, EntityUsage )
 
     puma::pina::Entity ntt0 = nttProvider->requestEntity();
     puma::pina::Entity ntt1 = nttProvider->requestEntity();
+    puma::pina::Entity ntt2 = nttProvider->requestEntity();
 
     EXPECT_TRUE( nttProvider->isEntityEnabled( ntt0 ) );
     EXPECT_TRUE( nttProvider->isEntityEnabled( ntt1 ) );
+    EXPECT_TRUE( nttProvider->isEntityEnabled( ntt2 ) );
+
+    nttProvider->disableEntity( ntt0 );
+    nttProvider->disableEntity( ntt2 );
+
+    EXPECT_FALSE( nttProvider->isEntityEnabled( ntt0 ) );
+    EXPECT_TRUE( nttProvider->isEntityEnabled( ntt1 ) );
+    EXPECT_FALSE( nttProvider->isEntityEnabled( ntt2 ) );
 
     nttProvider->disposeEntity(ntt0);
 #ifdef _DEBUG
@@ -50,6 +59,22 @@ TEST( ECS, EntityUsage )
 #endif
 
     nttProvider->disposeEntity(ntt1);
+
+#ifdef _DEBUG
+    EXPECT_DEATH( nttProvider->isEntityEnabled( ntt1 ), "EntityStatus::Unassigned" );
+#else
+    EXPECT_FALSE( nttProvider->isEntityEnabled( ntt1 ) );
+#endif
+
+    nttProvider->uninit();
+
+#ifdef _DEBUG
+    EXPECT_DEATH( nttProvider->isEntityEnabled( ntt2 ), "EntityStatus::Unassigned" );
+    EXPECT_DEATH( nttProvider->disposeEntity( ntt2 ), "EntityStatus::Unassigned" );
+#else
+    EXPECT_FALSE( nttProvider->isEntityEnabled( ntt2 ) );
+    nttProvider->disposeEntity( ntt2 );
+#endif
 
 }
 
