@@ -1,5 +1,3 @@
-#pragma once
-
 #include <internal/component/componentimpl.h>
 #include <memory>
 #include <pina/component.h>
@@ -29,6 +27,11 @@ namespace puma::pina
     bool Component::isEnabled() const
     {
         return m_impl->isEnabled();
+    }
+
+    Entity Component::getOwnerEntity() const
+    {
+        return m_impl->getEntity();
     }
 
 }

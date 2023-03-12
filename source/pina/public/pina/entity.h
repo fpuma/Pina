@@ -4,5 +4,6 @@
 
 namespace puma::pina
 {
-    DECLARE_GENERIC_ID( Entity, size_t, (size_t)-1 );
+    class Entity;
 }
+DECLARE_GENERIC_ID( puma::pina::Entity, size_t, (size_t)-1 );

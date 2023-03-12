@@ -1,15 +1,23 @@
 #pragma once
 
-#include <pina/private/ecsdata.h>
+#include <pina/entity.h>
 #include <utils/numerictypes.h>
 
 namespace puma::pina
 {
-    class EntityProviderImpl
+    enum class EntityStatus
+    {
+        Unassigned,
+        Enabled,
+        Disabled,
+        //Disposed, //I plan to use this state in case we want to debug if a disposed entity is being reused
+    };
+
+    class EntityProviderImpl final
     {
     public:
 
-        EntityProviderImpl( EcsData& _data );
+        EntityProviderImpl() = default;
         ~EntityProviderImpl();
 
         void init( puma::u32 _entityCount );
@@ -28,7 +36,6 @@ namespace puma::pina
 
     private:
 
-        EcsData& m_ecsData;
-
+        std::vector<EntityStatus> m_entities;
     };
 }

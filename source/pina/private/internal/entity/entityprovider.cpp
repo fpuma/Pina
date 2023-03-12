@@ -1,12 +1,13 @@
-#include <internal/entityprovider/entityproviderimpl.h>
-#include <pina/private/entityprovider.h>
+#include <pina/hidden/entityprovider.h>
+#include <internal/entity/entityproviderimpl.h>
 
 namespace puma::pina
 {
-    EntityProvider::EntityProvider( EcsData& _data )
+    EntityProvider::EntityProvider()
     {
-        m_impl = std::make_unique<EntityProviderImpl>( _data );
+        m_impl = std::make_unique<EntityProviderImpl>();
     }
+
     EntityProvider::~EntityProvider() {}
 
     void EntityProvider::init( puma::u32 _entityCount )
