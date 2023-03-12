@@ -43,7 +43,6 @@ namespace puma::pina
     void EcsData::uninit()
     {
         m_entities->uninit();
-        m_components->uninit();
     }
 
     void EcsData::onEvent( const PinaEventBase& _event )
@@ -69,9 +68,9 @@ namespace puma::pina
             if (m_assignedComponentsMap.contains( removedEntity ))
             {
                 auto& componentList = m_assignedComponentsMap.at( removedEntity );
-                for (const ComponentIndex& componentIndex : componentList)
+                while (!componentList.empty())
                 {
-                    m_components->remove( removedEntity, componentIndex );
+                    m_components->remove( removedEntity, *componentList.begin());
                 }
                 m_assignedComponentsMap.erase( removedEntity );
             }

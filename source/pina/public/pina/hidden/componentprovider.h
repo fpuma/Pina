@@ -14,8 +14,6 @@ namespace puma::pina
 
         virtual ~ComponentProvider() {}
 
-        void uninit();
-
     protected:
 
         void onAdded( Entity _entity, std::shared_ptr<Component> _component, std::type_index _componentTypeIndex ) override;

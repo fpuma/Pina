@@ -1,6 +1,6 @@
 #include <pina/component.h>
 #include <utils/numerictypes.h>
-
+#include <string>
 
 class ComponentA : public puma::pina::Component
 {
@@ -24,4 +24,16 @@ public:
 private:
 
     float m_number = 0.0f;
+};
+
+class ComponentC : public puma::pina::Component
+{
+public:
+
+    std::string getNumber() const { return m_str; }
+    void setNumber( std::string _str ) { m_str = _str; }
+
+private:
+
+    std::string m_str = "";
 };

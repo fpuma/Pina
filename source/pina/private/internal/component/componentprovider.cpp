@@ -6,11 +6,6 @@
 
 namespace puma::pina
 {
-    void ComponentProvider::uninit()
-    {
-        clear();
-    }
-
     void ComponentProvider::onAdded( Entity _entity, std::shared_ptr<Component> _component, std::type_index _componentTypeIndex )
     {
         _component->m_impl->setEntity( _entity );
