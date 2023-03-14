@@ -1,7 +1,7 @@
 #pragma once
 
 #include <utils/events/eventmanager.h>
-#include <pina/hidden/events/pinaeventbase.h>
+#include <pina/hidden/pinaeventbase.h>
 
 namespace puma::pina
 {

@@ -1,7 +1,7 @@
 #include "componentimpl.h"
 
-#include <pina/hidden/events/pinaeventmanager.h>
-#include <pina/hidden/events/pinaevents.h>
+#include <pina/hidden/pinaeventmanager.h>
+#include <pina/hidden/pinaevents.h>
 
 #include <utils/defaultinstance.h>
 

@@ -1,9 +1,9 @@
-#include <pina/hidden/ecsdata.h>
+#include <pina/ecsdata.h>
 
-#include <pina/hidden/componentprovider.h>
-#include <pina/hidden/entityprovider.h>
-#include <pina/hidden/events/pinaeventmanager.h>
-#include <pina/hidden/events/pinaevents.h>
+#include <pina/componentprovider.h>
+#include <pina/entityprovider.h>
+#include <pina/hidden/pinaeventmanager.h>
+#include <pina/hidden/pinaevents.h>
 #include <utils/defaultinstance.h>
 
 #include <assert.h>

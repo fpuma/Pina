@@ -2,7 +2,7 @@
 
 #include <pina/component.h>
 #include <pina/entity.h>
-#include <pina/hidden/events/pinaeventbase.h>
+#include <pina/hidden/pinaeventbase.h>
 #include <utils/events/ieventlistener.h>
 
 #include <algorithm>

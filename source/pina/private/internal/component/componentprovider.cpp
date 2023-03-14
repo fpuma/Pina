@@ -1,7 +1,7 @@
 #include <internal/component/componentimpl.h>
-#include <pina/hidden/componentprovider.h>
-#include <pina/hidden/events/pinaevents.h>
-#include <pina/hidden/events/pinaeventmanager.h>
+#include <pina/componentprovider.h>
+#include <pina/hidden/pinaevents.h>
+#include <pina/hidden/pinaeventmanager.h>
 #include <utils/defaultinstance.h>
 
 namespace puma::pina

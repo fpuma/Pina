@@ -1,4 +1,5 @@
-#include <pina/component.h>
+#include <pina.h>
+
 #include <utils/numerictypes.h>
 #include <string>
 

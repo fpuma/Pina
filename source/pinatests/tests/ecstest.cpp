@@ -1,11 +1,6 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
-#include <pina/ecs.h>
-
-#include <pina/hidden/componentprovider.h>
-#include <pina/hidden/entityprovider.h>
-
 #include "testcomponents.h"
 
 TEST( ECS, EntityLifetime )
