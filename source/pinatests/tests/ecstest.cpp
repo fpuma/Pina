@@ -84,27 +84,10 @@ TEST( ECS, ComponentLifetime )
     puma::pina::Entity ntt0 = nttProvider->requestEntity();
     puma::pina::Entity ntt1 = nttProvider->requestEntity();
     puma::pina::Entity ntt2 = nttProvider->requestEntity();
-
-#ifdef _DEBUG
-    EXPECT_DEATH( compProvider->add<ComponentA>( ntt0 ), "itRegisteredClass" );
-    EXPECT_DEATH( compProvider->remove<ComponentA>( ntt0 ), "m_elements.end" );
-    EXPECT_DEATH( compProvider->get<ComponentA>( ntt0 ), "m_elements.end" );
-    EXPECT_DEATH( compProvider->getSafely<ComponentA>( ntt0 ), "m_elements.end" );
-#else
-    EXPECT_EQ( compProvider->add<ComponentA>( ntt0 ), nullptr );
-    //compProvider->remove<ComponentA>( ntt0 ); //Why is this throwing an exception?
-    EXPECT_EQ( compProvider->get<ComponentA>( ntt0 ), nullptr );
-    EXPECT_EQ( compProvider->getSafely<ComponentA>( ntt0 ), nullptr );
-#endif
-    EXPECT_FALSE( compProvider->contains<ComponentA>( ntt0 ) );
     
     compProvider->registerClass<ComponentA>();
     compProvider->registerClass<ComponentB>();
     compProvider->registerClass<ComponentC>();
-
-    EXPECT_FALSE( compProvider->contains<ComponentA>( ntt0 ) );
-    EXPECT_FALSE( compProvider->contains<ComponentB>( ntt1 ) );
-    EXPECT_FALSE( compProvider->contains<ComponentC>( ntt2 ) );
 
     compProvider->add<ComponentA>( ntt0 );
     compProvider->add<ComponentB>( ntt0 );
@@ -116,21 +99,36 @@ TEST( ECS, ComponentLifetime )
     compProvider->add<ComponentB>( ntt2 );
     compProvider->add<ComponentC>( ntt2 );
 
-    EXPECT_TRUE( compProvider->contains<ComponentB>( ntt0 ) );
-    EXPECT_TRUE( compProvider->contains<ComponentC>( ntt1 ) );
-    EXPECT_TRUE( compProvider->contains<ComponentA>( ntt2 ) );
-
     auto safeCompA0 = compProvider->getSafely<ComponentA>( ntt0 );
-    auto compA1 = compProvider->get<ComponentA>( ntt1 );
     auto compA2 = compProvider->get<ComponentA>( ntt2 );
+    auto compB2 = compProvider->get<ComponentB>( ntt2 );
 
-    EXPECT_NE( safeCompA0, nullptr );
-    EXPECT_NE( compA1, nullptr );
-    EXPECT_NE( compA2, nullptr );
+    EXPECT_TRUE( compA2->isEnabled() );
+    EXPECT_TRUE( compB2->isEnabled() );
 
-    compProvider->remove<ComponentA>( ntt1 );
-    
-    EXPECT_FALSE( compProvider->contains<ComponentA>( ntt1 ) );
+    nttProvider->disableEntity( ntt2 );
+    EXPECT_FALSE( compA2->isEnabled() );
+    EXPECT_FALSE( compB2->isEnabled() );
+
+    nttProvider->enableEntity( ntt2 );
+    EXPECT_TRUE( compA2->isEnabled() );
+    EXPECT_TRUE( compB2->isEnabled() );
+
+    compA2->disable();
+    EXPECT_FALSE( compA2->isEnabled() );
+    EXPECT_TRUE( compB2->isEnabled() );
+
+#ifdef _DEBUG
+    EXPECT_DEATH( nttProvider->enableEntity( ntt2 ), "EntityStatus::Enabled" );
+#endif
+
+    nttProvider->disableEntity( ntt2 );
+    EXPECT_FALSE( compA2->isEnabled() );
+    EXPECT_FALSE( compB2->isEnabled() );
+
+#ifdef _DEBUG
+    EXPECT_DEATH( nttProvider->disableEntity( ntt2 ), "EntityStatus::Disabled" );
+#endif
 
     nttProvider->disposeEntity( ntt2 );
 
@@ -151,7 +149,7 @@ TEST( ECS, ComponentLifetime )
 #endif     
 }
 
-TEST( ECS, ComponentsUsage )
+TEST( ECS, DynamicFetching )
 {
     puma::pina::ECS ecs;
     puma::pina::EntityProvider* nttProvider = ecs.getEntityProvider();

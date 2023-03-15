@@ -70,6 +70,7 @@ namespace puma::pina
     {
         EntityStatus& entityState = m_entities[_entity.value()];
         assert( entityState != EntityStatus::Unassigned ); //Entity has been already disposed
+        assert( EntityStatus::Enabled != entityState ); //Entity is already enabled
         if (EntityStatus::Enabled != entityState)
         {
             entityState = EntityStatus::Enabled;
@@ -81,6 +82,7 @@ namespace puma::pina
     {
         EntityStatus& entityState = m_entities[_entity.value()];
         assert( entityState != EntityStatus::Unassigned ); //Entity has been already disposed
+        assert( EntityStatus::Disabled != entityState ); //Entity is already disabled
         if (EntityStatus::Disabled != entityState)
         {
             entityState = EntityStatus::Disabled;
