@@ -163,7 +163,7 @@ TEST( ECS, DynamicFetching )
 
     compProvider->registerClass<ComponentA>();
     compProvider->registerClass<ComponentB>();
-    compProvider->registerClass<ComponentC>();
+    compProvider->registerInterface< IComponentC, ComponentC>();
 
     compProvider->add<ComponentA>( ntt0 );
     compProvider->add<ComponentB>( ntt0 );
@@ -177,8 +177,8 @@ TEST( ECS, DynamicFetching )
 
     auto aNtts = ecs.getEntitesByComponents<ComponentA>();
     auto abNtts = ecs.getEntitesByComponents<ComponentA, ComponentB>();
-    auto acNtts = ecs.getEntitesByComponents<ComponentA, ComponentC>();
-    auto abcNtts = ecs.getEntitesByComponents<ComponentA, ComponentB, ComponentC>();
+    auto acNtts = ecs.getEntitesByComponents<ComponentA, IComponentC>();
+    auto abcNtts = ecs.getEntitesByComponents<ComponentA, ComponentB, IComponentC>();
 
     EXPECT_EQ( aNtts.size(), 3 );
     EXPECT_EQ( abNtts.size(), 2 );
@@ -199,8 +199,8 @@ TEST( ECS, DynamicFetching )
 
     compProvider->remove<ComponentA>( ntt2 );
 
-    abcNtts = ecs.getEntitesByComponents<ComponentA, ComponentB, ComponentC>();
-    auto bcNtts = ecs.getEntitesByComponents<ComponentB, ComponentC>();
+    abcNtts = ecs.getEntitesByComponents<ComponentA, ComponentB, IComponentC>();
+    auto bcNtts = ecs.getEntitesByComponents<ComponentB, IComponentC>();
 
     EXPECT_TRUE( abcNtts.empty() );
     EXPECT_EQ( bcNtts.size(), 1 );

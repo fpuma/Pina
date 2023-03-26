@@ -14,6 +14,7 @@ namespace puma::pina
 		ComponentRemoved,
 		ComponentEnabled,
 		ComponentDisabled,
+		ComponentInterfaceRegistered,
 	};
 
 	class PinaEventBase : public IEvent

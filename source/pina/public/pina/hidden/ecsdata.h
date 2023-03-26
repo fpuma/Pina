@@ -58,6 +58,8 @@ namespace puma::pina
 		EnabledComponentsMap m_enabledComponentsMap; //This is to keep track the enabled components on entities
 		AssignedComponentsMap m_assignedComponentsMap; //This is to keep track of the actual components assigned to entities
 
+		std::unordered_map<std::type_index, std::type_index> m_componentRegistrationMap;
+
 		template<>
 		struct InternalEntitesByComponents<>
 		{

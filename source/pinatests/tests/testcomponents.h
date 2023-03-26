@@ -27,12 +27,20 @@ private:
     float m_number = 0.0f;
 };
 
-class ComponentC : public puma::pina::Component
+class IComponentC : public puma::pina::Component
+{
+public:
+    virtual ~IComponentC() {}
+    virtual std::string getNumber() const = 0;
+    virtual void setNumber( std::string _str ) = 0;
+};
+
+class ComponentC : public IComponentC
 {
 public:
 
-    std::string getNumber() const { return m_str; }
-    void setNumber( std::string _str ) { m_str = _str; }
+    std::string getNumber() const override { return m_str; }
+    void setNumber( std::string _str ) override { m_str = _str; }
 
 private:
 

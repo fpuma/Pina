@@ -18,5 +18,6 @@ namespace puma::pina
 
         void onAdded( Entity _entity, std::shared_ptr<Component> _component, std::type_index _componentTypeIndex ) override;
         void onRemoved( Entity _entity, std::shared_ptr<Component> _component, std::type_index _componentTypeIndex ) override;
+        void onInterfaceRegistered( std::type_index _interfaceTypeIndex, std::type_index _classTypeIndex ) override;
     };
 }

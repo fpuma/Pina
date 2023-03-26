@@ -17,4 +17,9 @@ namespace puma::pina
     {
         DefaultInstance<PinaEventManager>::getInstance()->executeEvent( ComponentRemovedEvent( _entity, _componentTypeIndex ) );
     }
+
+    void ComponentProvider::onInterfaceRegistered( std::type_index _interfaceTypeIndex, std::type_index _classTypeIndex )
+    {
+        DefaultInstance<PinaEventManager>::getInstance()->executeEvent( ComponentInterfaceRegisteredEvent( _interfaceTypeIndex, _classTypeIndex ) );
+    }
 }

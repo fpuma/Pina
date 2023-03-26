@@ -114,4 +114,26 @@ namespace puma::pina
 			: PinaEventBase( PinaEventType::ComponentDisabled )
 			, ComponentEvent( _entity, _componentIndex ) {}
 	};
+
+	class ComponentInterfaceRegisteredEvent : public PinaEventBase
+	{
+	public:
+
+		using ComponentIndex = std::type_index;
+
+		ComponentInterfaceRegisteredEvent( ComponentIndex _compInterfaceIndex, ComponentIndex _compClassIndex )
+			: PinaEventBase( PinaEventType::ComponentInterfaceRegistered )
+			, m_componentInterfaceIndex ( _compInterfaceIndex )
+			, m_componentClassIndex( _compClassIndex )
+		{}
+		virtual ~ComponentInterfaceRegisteredEvent() = default;
+
+		ComponentIndex getComponentInterfaceIndex() const { return m_componentInterfaceIndex; }
+		ComponentIndex getComponentClassIndex() const { return m_componentClassIndex; }
+
+	private:
+
+		const ComponentIndex m_componentInterfaceIndex;
+		const ComponentIndex m_componentClassIndex;
+	};
 }

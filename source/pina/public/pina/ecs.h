@@ -1,7 +1,7 @@
 #pragma once
 
 #include <pina/entity.h>
-#include <pina/ecsdata.h>
+#include <pina/hidden/ecsdata.h>
 
 #include <set>
 
