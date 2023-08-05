@@ -46,3 +46,15 @@ private:
 
     std::string m_str = "";
 };
+
+class ComponentD : public puma::pina::Component
+{
+public:
+
+    float getNumber() const { return m_number; }
+    void setNumber( float _num ) { m_number = _num; }
+
+private:
+
+    float m_number = 0.0f;
+};

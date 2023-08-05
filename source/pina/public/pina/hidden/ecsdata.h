@@ -43,7 +43,7 @@ namespace puma::pina
 		}
 
 	private:
-		
+
 		using ComponentIndex = std::type_index;
 		using EnabledComponentsMap = std::unordered_map<ComponentIndex, std::set<Entity>>;
 		using AssignedComponentsMap = std::unordered_map<Entity, std::set<ComponentIndex>>;
@@ -77,19 +77,32 @@ namespace puma::pina
 				if (_enabledComponentsMap.contains( typeIndex ))
 				{
 					const std::set<Entity>& compNtts = _enabledComponentsMap.at( typeIndex );
-					if (_entities.empty())
+
+					if (false == compNtts.empty())
 					{
-						_entities.insert( compNtts.begin(), compNtts.end() );
+						if (_entities.empty())
+						{
+							_entities.insert( compNtts.begin(), compNtts.end() );
+						}
+						else
+						{
+							std::set<Entity> aux = _entities;
+							_entities.clear();
+							std::set_intersection( aux.begin(), aux.end(), compNtts.begin(), compNtts.end(), std::inserter( _entities, _entities.begin() ) );
+						}
+
+						InternalEntitesByComponents<Args...>::get( _entities, _enabledComponentsMap );
 					}
 					else
 					{
-						std::set<Entity> aux = _entities;
 						_entities.clear();
-						std::set_intersection( aux.begin(), aux.end(), compNtts.begin(), compNtts.end(), std::inserter( _entities, _entities.begin() ) );
 					}
 				}
+				else
+				{
+					_entities.clear();
+				}
 
-				InternalEntitesByComponents<Args...>::get( _entities, _enabledComponentsMap );
 			}
 		};
 

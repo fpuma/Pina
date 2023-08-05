@@ -84,7 +84,7 @@ TEST( ECS, ComponentLifetime )
     puma::pina::Entity ntt0 = nttProvider->requestEntity();
     puma::pina::Entity ntt1 = nttProvider->requestEntity();
     puma::pina::Entity ntt2 = nttProvider->requestEntity();
-    
+
     compProvider->registerClass<ComponentA>();
     compProvider->registerClass<ComponentB>();
     compProvider->registerClass<ComponentC>();
@@ -163,6 +163,7 @@ TEST( ECS, DynamicFetching )
 
     compProvider->registerClass<ComponentA>();
     compProvider->registerClass<ComponentB>();
+    compProvider->registerClass<ComponentD>();
     compProvider->registerInterface< IComponentC, ComponentC>();
 
     compProvider->add<ComponentA>( ntt0 );
@@ -179,11 +180,15 @@ TEST( ECS, DynamicFetching )
     auto abNtts = ecs.getEntitesByComponents<ComponentA, ComponentB>();
     auto acNtts = ecs.getEntitesByComponents<ComponentA, IComponentC>();
     auto abcNtts = ecs.getEntitesByComponents<ComponentA, ComponentB, IComponentC>();
+    auto dNtts = ecs.getEntitesByComponents<ComponentD>();
+    auto adNtts = ecs.getEntitesByComponents<ComponentA, ComponentD>();
 
     EXPECT_EQ( aNtts.size(), 3 );
     EXPECT_EQ( abNtts.size(), 2 );
     EXPECT_EQ( acNtts.size(), 2 );
     EXPECT_EQ( abcNtts.size(), 1 );
+    EXPECT_TRUE( dNtts.empty() );
+    EXPECT_TRUE( adNtts.empty() );
 
     for (const puma::pina::Entity& ntt : abNtts)
     {
