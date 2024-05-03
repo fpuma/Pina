@@ -1,12 +1,11 @@
 namespace Puma
 {
     [Sharpmake.Generate]
-    class Pina : Puma.Common.IMyLib
+    class Pina : Puma.SharpmakeBase.IStaticLibrary
     {
         public Pina()
             : base("Pina", @"pina")
         {
-            AdditionalSourceRootPaths.Add(Utils.FullExternSourcePath);
         }
 
         public override void ConfigureAll(Configuration conf, Sharpmake.Target target)

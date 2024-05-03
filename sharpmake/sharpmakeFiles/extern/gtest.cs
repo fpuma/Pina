@@ -1,13 +1,10 @@
 namespace Puma
 {
-    [Sharpmake.Export]
-    class GoogleTest : Puma.Common.IExternBinaries
+    [Sharpmake.Generate]
+    class GoogleTest : Puma.SharpmakeBase.IBinaries
     {
-        private static readonly string RelativeSourcePath = @"googletest-release-1.12.1";
-        public static readonly string FullExternSourcePath = Puma.SharpmakeUtils.GetExternPath() + @"\" + RelativeSourcePath;
-
         public GoogleTest()
-            : base("GTest", RelativeSourcePath)
+            : base("GTest", @"extern\googletest-release-1.12.1")
         { }
 
         public override void ConfigureIncludes(Configuration conf, Sharpmake.Target target)
@@ -35,6 +32,7 @@ namespace Puma
                 conf.LibraryFiles.Add(@"gtest.lib");
             }
 
+            conf.SolutionFolder = "Extern";
         }
     }
 }
