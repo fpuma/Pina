@@ -3,7 +3,7 @@ using System.IO;
 namespace Puma
 {
     [Sharpmake.Generate]
-    public class PinaSolution : Puma.Common.IMySolution
+    public class PinaSolution : Puma.SharpmakeBase.ISolution
     {
         public PinaSolution()
             : base("Pina")

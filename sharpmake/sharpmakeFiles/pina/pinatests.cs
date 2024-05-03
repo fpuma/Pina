@@ -1,13 +1,11 @@
 namespace Puma
 {
     [Sharpmake.Generate]
-    class PinaTests : Puma.Common.IMyApplication
+    class PinaTests : Puma.SharpmakeBase.IApplication
     {
         public PinaTests()
             : base("PinaTests", @"pinatests")
         {
-            AdditionalSourceRootPaths.Add(GoogleTest.FullExternSourcePath);
-            AdditionalSourceRootPaths.Add(Utils.FullExternSourcePath);
         }
 
         public override void ConfigureAll(Configuration conf, Sharpmake.Target target)
@@ -19,6 +17,8 @@ namespace Puma
             conf.AddPrivateDependency<Puma.Pina>(target);
 
             conf.Options.Add(Sharpmake.Options.Vc.General.TreatWarningsAsErrors.Enable);
+
+            conf.SolutionFolder = "Tests";
         }
     }
 }

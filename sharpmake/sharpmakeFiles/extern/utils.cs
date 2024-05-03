@@ -1,20 +1,17 @@
 namespace Puma
 {
-    [Sharpmake.Export]
-    class Utils : Puma.Common.IExternBinaries
+    [Sharpmake.Generate]
+    class Utils : Puma.SharpmakeBase.IHeaderOnly
     {
-        private static readonly string RelativeSourcePath = @"utilslibrary\source\utils";
-        public static readonly string FullExternSourcePath = Puma.SharpmakeUtils.GetExternPath() + @"\" + RelativeSourcePath;
-
         public Utils()
-            : base("Utils", RelativeSourcePath)
+            : base("Utils", @"submodules\utils\source\utils")
         { }
 
         public override void ConfigureIncludes(Configuration conf, Sharpmake.Target target) 
         {
-            conf.IncludePaths.Add(@"\public");
-        }
+            conf.IncludePaths.Add(@"\include");
 
-        public override void ConfigureLink(Configuration conf, Sharpmake.Target target) { }
+            conf.SolutionFolder = "Extern";
+        }
     }
 }
