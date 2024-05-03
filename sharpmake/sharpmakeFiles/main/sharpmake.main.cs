@@ -1,6 +1,6 @@
 using System.IO;
 
-[module: Sharpmake.Include(@"..\base\*")]
+[module: Sharpmake.Include(@"..\..\sharpmakeutils\utils\*")]
 
 [module: Sharpmake.Include(@"..\pina\*")]
 [module: Sharpmake.Include(@"..\extern\*")]
