@@ -4,14 +4,14 @@ namespace Puma
     class Utils : Puma.SharpmakeBase.IHeaderOnly
     {
         public Utils()
-            : base("Utils", @"submodules\utils\source\utils")
+            : base("Utils", @"submodules\utils")
         { }
 
         public override void ConfigureIncludes(Configuration conf, Sharpmake.Target target) 
         {
             conf.IncludePaths.Add(@"\include");
 
-            conf.SolutionFolder = "Extern";
+            conf.SolutionFolder = "Submodules";
         }
     }
 }
